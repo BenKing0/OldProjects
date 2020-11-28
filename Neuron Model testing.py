@@ -64,39 +64,3 @@ plt.xlabel('Time, ms')
 plt.yticks(np.linspace(0,int(max(tracker[1])),int(max(tracker[1])+1)))  
 plt.legend()
 plt.show()
-
-#%%
-
-def generate_series(x,SNR):
-    mean = SNR*np.mean(x)
-    stddev = SNR*np.std(x)    
-    noise = rnd.normal(mean,stddev,len(x))
-    pattern = np.add(x,noise)
-    return pattern;
-    
-dat = np.concatenate((y[1],np.mean(y[1])*rnd.rand(int(len(y[1])/2))))
-# SNR-`signal to noise ratio` is actually the proportion of noise here (unitless).
-pattern = generate_series(dat[:int(len(dat))],0.0)
-
-bin_size = 3
-series = pattern
-# Set normalisation to False for speed if it makes no major difference
-perm_ent = PE.PE(series,bin_size,False,100).results()
-
-fig = plt.figure()
-fig.add_axes((0,0,1.5,1))
-plt.plot(np.linspace(0,len(series),len(series)),series)
-plt.xlim(0,len(series))
-fig.add_axes((0,-0.75,1.5,0.7))
-plt.plot(np.linspace(0,len(perm_ent),len(perm_ent)),perm_ent)
-plt.xlim(0,len(perm_ent))
-plt.show()
-
-#%%
-
-from scipy.io import wavfile as wav
-import os
-
-os.chdir('C:/Users/44790/Documents/University/ICL Project/Papers/Izhikevich/Aux files')
-
-rate,data = wav.read('female.wav')
