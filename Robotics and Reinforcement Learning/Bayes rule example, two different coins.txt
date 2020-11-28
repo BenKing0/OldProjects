@@ -1,0 +1,4 @@
+P(fair|H) 
+= P(H|fair)P(fair)/P(H)
+= P(H|fair)P(fair)/[P(H|not fair)P(not fair)+P(H|fair)P(fair)]
+= 0.5*0.5/[0.1*0.5+0.5*0.5] = 0.833333...

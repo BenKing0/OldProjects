@@ -1,0 +1,8 @@
+X ~ N(10,1):
+P(X) = [1/sqrt(2\pi)]*exp((-1/2)*(X-1)^2)
+
+d_1 ~ N(11,0.5):
+P(d_1) = [1/sqrt(0.25\pi)]*exp(-2(d_1-11)^2)
+
+Therefore: P(d_1|X) = P(d_1 = X)? = [1/sqrt(0.5\pi)]*exp(-2(X-11)^2)
+`If you know X, what is the probability distribution of d_1?`

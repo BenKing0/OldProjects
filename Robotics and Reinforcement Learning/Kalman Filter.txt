@@ -1,0 +1,56 @@
+Kalman Filter:
+---------------
+---------------
+
+1. Use previous error estimate and error in the newly observed data's error to produce the Kalman Gain.
+- More weight is given to the estimated expected value that has the smaller error.
+
+Kalman Gain:
+-------------
+KG_{t} = Err(estimate_{t}) / [Err(measurement) + Err(estimate_{t})], 0 <= KG <= 1.
+(eg. KG = 1 means measurement error << estimate error, more weight to measurement)
+
+
+2. Use the Kalman Gain along with the previous estimated value and the newly observed data to 
+produce the new estimated value.
+
+Next estimated value:
+----------------------
+estimate_{t+1} = estimate_{t} + KG_{t} * [measurement - estimate_{t}].
+(Note that if KG ~ 1, the estimate_{t+1} ~ measurement, and if KG ~ 0, estimate_{t+1} ~ estimate_{t},
+if KG ~ 0.5 however, approximately equal weighting given)
+
+
+3. Use the newly produced estimated value and the Kalman Gain to produce a new estimated error, 
+which then goes back into the first step calculations for the next iteration with new observed data.
+
+Corresponding estimated error:
+-------------------------------
+Err(estimate_{t+1}) = [1/Err(measurement) + 1/Err(estimate_{t})]^{-1}.
+!- Therefore:
+Err(estimate(_{t+1}) = [1 - KG_{t}] * Err(estimate_{t}).
+
+
+#############################################################################################################
+Notice how this corresponds to the case using Gaussian distributions:
+
+The measurement is some observed mean, \nu, with a corresponding observed error (variance), \r^2.
+Similarly the previous estimate is a mean, \mu, with a previously estimated error (variance), \simga^2.
+
+In this case:
+--------------
+estimated_{i} = \mu_{i}
+Err(estimate_{i}) = \sigma_{i}^2
+measurement = \nu
+Err(measurement) = \r^2
+
+\mu_{t+1} = \mu_{t} + KG * [\nu - \mu_{t}]
+	  = \mu_{t} + (\sigma_{t}^2 / (\sigma_{t}^2 + \r^2)) * [\nu - \mu_{t}]
+	  = [\mu*\r^2 + \nu*\sigma_{t}^2] / [\r^2 + \sigma_{t}^2], as shown in Lec 4-5 of the course.
+
+Similarly: 
+\sigma_{t+1}^2 = 1 / (1/\sigma_{t}^2 + 1/\r^2), as shown in Lec 4-5 of the course.
+
+A KALMAN FILTER IS THEREFORE A MOVEMENT AND A SENSING UPDATE ROLLED INTO 1 ALGORITHM.
+IT NON-EXPLICITLY CARRIES OUT BAYESIAN INFERENCE ON GAUSSIAN DISTRIBUTIONS, NARROWING THE UNCERTAINTY OF THE 
+POSTERIOR EVERY ITERATION BY INCLUDING MORE DATA.
