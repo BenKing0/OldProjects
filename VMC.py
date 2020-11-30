@@ -1,3 +1,11 @@
+'''
+Using VMC with the Metropolis Algorithm to approximate the ground state energies of multi-electron systems that have no known analytic solutions.
+The approximation depends critically on a test function, and the function must be analytically twice differentiable wrt the Euclidean variables (x,y,z), 
+in order to define a Hamiltonian acting on the test function. Note that the test function must behave physically also, 
+e.g. it must tend to zero at infinite ranges, it must share the symmetry (spatial and spin) of the system of electrons that it is modelling, 
+and it must belong the the set of square-integrable functions that define the Hilbert Space.
+'''
+
 import random
 import numpy as np
 from scipy import integrate
