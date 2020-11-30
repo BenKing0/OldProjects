@@ -41,7 +41,7 @@ plt.ylabel('PE (normalised)')
 plt.xlabel('Hours to present')
 plt.show()
 
-#%%
+'''
 import time
 
 pause = 2 # seconds
@@ -57,7 +57,7 @@ while 1:
     print(current_high)
     time.sleep(pause)
     
-    
+'''    
 '''
 information = ticker.info
 
